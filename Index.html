@@ -1,0 +1,304 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advanced HTML Tricks — Presented by Mr. Lazarus (IT Tutor)</title>
+  <meta name="description" content="Interactive one-file HTML slide deck demonstrating advanced HTML tricks for IT students.">
+  <style>
+    :root{
+      --bg:#ffffff;--fg:#0b1220;--muted:#5a6470;--accent:#0066cc;--card:#f6f8fa;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{--bg:#0b1220;--fg:#eef3f8;--muted:#9aa6b2;--accent:#3da0ff;--card:#11151a}
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--fg)}
+    .deck{height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
+    .slide{width:100%;max-width:1100px;height:74vh;border-radius:12px;padding:28px;box-shadow:0 8px 30px rgba(2,6,23,.12);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);display:none;overflow:auto}
+    .slide.active{display:block}
+    header.deck-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .title h1{margin:0;font-size:1.6rem}
+    .meta{color:var(--muted);font-size:.95rem}
+    footer.deck-foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:var(--muted)}
+    nav.controls button{margin-left:6px}
+    button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+    button.ghost{background:transparent;color:var(--fg);border:1px solid rgba(0,0,0,.06)}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+    .card{background:var(--card);padding:14px;border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.02)}
+    pre{background:transparent;padding:0;margin:0;overflow:auto}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Roboto Mono,monospace;font-size:.95rem}
+    textarea.code{width:100%;height:160px;border-radius:8px;padding:10px;border:1px dashed rgba(0,0,0,.06);resize:vertical;background:transparent;color:var(--fg)}
+    iframe.preview{width:100%;height:200px;border:1px solid rgba(0,0,0,.06);border-radius:8px}
+    .small{font-size:.9rem;color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.04);font-weight:600}
+    /* responsive */
+    @media(max-width:980px){.grid{grid-template-columns:1fr}.slide{height:80vh}}
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="slide active" id="slide-0">
+      <header class="deck-head">
+        <div class="title">
+          <h1>Advanced HTML Tricks</h1>
+          <div class="meta">Presented by <strong>Mr. Lazarus</strong> — 1 hour lesson • Interactive demo</div>
+        </div>
+        <div class="controls">
+          <button id="prev" class="ghost">◀ Prev</button>
+          <button id="next">Next ▶</button>
+          <button id="theme">Toggle Theme</button>
+        </div>
+      </header><main class="card">
+    <h2>Welcome — Quick plan</h2>
+    <ul>
+      <li>Quick semantic HTML recap (5 min)</li>
+      <li>Advanced inputs & forms (10 min)</li>
+      <li>Media, responsive images & performance (10 min)</li>
+      <li>HTML5 APIs & local state (10 min)</li>
+      <li>Accessibility, SEO & best practices (10 min)</li>
+      <li>Mini interactive challenge (10 min)</li>
+    </ul>
+    <p class="small">Use <span class="pill">Next</span> to step through slides. Editable code areas are live — press <strong>Run</strong> to preview.</p>
+  </main>
+
+  <footer class="deck-foot">
+    <div>Tip: press <kbd>←</kbd> and <kbd>→</kbd> to navigate</div>
+    <div>&copy; Mr. Lazarus — Advanced HTML Tricks</div>
+  </footer>
+</div>
+
+<!-- Slide 1: Semantic HTML -->
+<section class="slide" id="slide-1">
+  <header class="deck-head">
+    <div class="title"><h1>Semantic HTML & Structure</h1>
+      <div class="meta">Why semantics matter for accessibility & SEO</div>
+    </div>
+    <div class="controls">
+      <button id="s1-prev" class="ghost">◀ Prev</button>
+      <button id="s1-next">Next ▶</button>
+    </div>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <h3>Key tags</h3>
+      <ul>
+        <li>&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;section&gt;, &lt;aside&gt;, &lt;footer&gt;</li>
+        <li>Use headings in order: &lt;h1&gt; → &lt;h2&gt; → ...</li>
+        <li>Prefer &lt;figure&gt; + &lt;figcaption&gt; for images</li>
+        <li>ARIA only when necessary — prefer native semantic elements</li>
+      </ul>
+      <details>
+        <summary>Example</summary>
+
+<pre><code>&lt;main&gt;
+  &lt;article&gt;
+    &lt;h2&gt;My article&lt;/h2&gt;
+    &lt;figure&gt;
+      &lt;img src="photo.jpg" alt="Instructor demo"/&gt;
+      &lt;figcaption&gt;A demo photo&lt;/figcaption&gt;
+    &lt;/figure&gt;
+  &lt;/article&gt;
+&lt;/main&gt;
+</code></pre></details>
+    </div>
+    <div class="card">
+      <h3>Live editing</h3>
+      <p class="small">Edit HTML below and press <strong>Run</strong> to preview.</p>
+      <textarea id="code-semantics" class="code">&lt;!doctype html&gt;
+
+<html><body> <header><h1>My Site</h1></header> <main><article><h2>Hello</h2><p>Content</p></article></main> <footer><small>© Mr. Lazarus</small></footer> </body></html></textarea> <div style="margin-top:8px"> <button onclick="runPreview('code-semantics','preview-semantics')">Run</button> </div> <iframe id="preview-semantics" class="preview"></iframe> </div> </div> </section>
+
+<!-- Slide 2: Advanced Inputs -->
+<section class="slide" id="slide-2">
+  <header class="deck-head">
+    <div class="title"><h1>Advanced Form Controls</h1>
+      <div class="meta">Reduce JS by using built-in controls</div></div>
+    <div class="controls">
+      <button id="s2-prev" class="ghost">◀ Prev</button>
+      <button id="s2-next">Next ▶</button>
+    </div>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <h3>Useful inputs</h3>
+      <ul>
+        <li>&lt;input type="email" required autocomplete="on"&gt;</li>
+        <li>&lt;input type="date"&gt; &lt;input type="time"&gt;</li>
+        <li>&lt;input type="color"&gt; &lt;input type="range"&gt;</li>
+        <li>&lt;input type="file" accept="image/*" multiple&gt;</li>
+        <li>&lt;datalist&gt; for suggestions</li>
+        <li>&lt;output&gt; for live calculation</li>
+      </ul>
+
+      <details>
+        <summary>Example form</summary>
+
+<pre><code>&lt;form&gt;
+  &lt;label&gt;Email &lt;input type="email" required&gt;&lt;/label&gt;
+  &lt;label&gt;Color &lt;input type="color" value="#f00"&gt;&lt;/label&gt;
+  &lt;label&gt;Quantity &lt;input type="range" min="1" max="10" value="5"&gt;&lt;/label&gt;
+&lt;/form&gt;
+</code></pre></details>
+    </div>
+    <div class="card">
+      <h3>Live demo — form + output</h3>
+      <textarea id="code-form" class="code">&lt;!doctype html&gt;
+
+<html><body> <form oninput="sum.value = Number(a.value) + Number(b.value)"> <label>A: <input name="a" type="number" value="1"></label> <label>B: <input name="b" type="number" value="2"></label> <label>Sum: <output name="sum">3</output></label> </form> </body></html></textarea> <div style="margin-top:8px"><button onclick="runPreview('code-form','preview-form')">Run</button></div> <iframe id="preview-form" class="preview"></iframe> </div> </div> </section>
+
+<!-- Slide 3: Media & Responsive Images -->
+<section class="slide" id="slide-3">
+  <header class="deck-head"><div class="title"><h1>Media & Responsive Images</h1>
+    <div class="meta">Use &lt;picture&gt;, lazy loading, and accessible media</div></div>
+    <div class="controls"><button id="s3-prev" class="ghost">◀ Prev</button><button id="s3-next">Next ▶</button></div>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <h3>Techniques</h3>
+      <ul>
+        <li>&lt;picture&gt; + &lt;source&gt; for art direction</li>
+        <li>&lt;img loading="lazy" alt="..."&gt; to improve perf</li>
+        <li>&lt;video controls muted playsinline poster="..."&gt;</li>
+        <li>Provide captions & transcripts for accessibility</li>
+      </ul>
+      <details>
+        <summary>Responsive image example</summary>
+
+<pre><code>&lt;picture&gt;
+  &lt;source media="(max-width:600px)" srcset="/img/small.jpg"&gt;
+  &lt;img src="/img/large.jpg" alt="Demo image" loading="lazy"&gt;
+&lt;/picture&gt;
+</code></pre></details>
+    </div>
+    <div class="card">
+      <h3>Live demo — responsive picture</h3>
+      <textarea id="code-picture" class="code">&lt;!doctype html&gt;
+
+<html><body> <h3>This shows the same image inside the slide preview</h3> <picture> <source media="(max-width:600px)" srcset="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='120'%3E%3Crect width='100%25' height='100%25' fill='%2300aaff'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='white'%3ESmall view%3C/text%3E%3C/svg%3E"> <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='240'%3E%3Crect width='100%25' height='100%25' fill='%23006bb3'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='28' fill='white'%3ELarge view%3C/text%3E%3C/svg%3E" alt="Demo" loading="lazy" style="max-width:100%25;height:auto;"> </picture> </body></html></textarea> <div style="margin-top:8px"><button onclick="runPreview('code-picture','preview-picture')">Run</button></div> <iframe id="preview-picture" class="preview"></iframe> </div> </div> </section>
+
+<!-- Slide 4: HTML5 APIs & LocalStorage -->
+<section class="slide" id="slide-4">
+  <header class="deck-head"><div class="title"><h1>HTML5 APIs — LocalStorage & Geolocation</h1>
+    <div class="meta">Small examples that feel magical</div></div>
+    <div class="controls"><button id="s4-prev" class="ghost">◀ Prev</button><button id="s4-next">Next ▶</button></div>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <h3>LocalStorage note</h3>
+      <p class="small">Small state without backend — perfect for prototyping.</p>
+      <pre><code>&lt;textarea id="note"&gt;&lt;/textarea&gt;
+
+<button onclick="localStorage.setItem('note',document.getElementById('note').value)">Save</button> <script>document.getElementById('note').value = localStorage.getItem('note') || '';</script></code></pre> </div> <div class="card"> <h3>Live demo — localStorage</h3> <textarea id="code-storage" class="code"><!doctype html> <html><body> <h3>Quick notes (saved locally)</h3> <textarea id="note" style="width:100%25;height:90px" placeholder="Write something..."></textarea> <div style="margin-top:8px"><button id="saveBtn">Save</button> <button id="clearBtn">Clear</button></div> <script> const note = document.getElementById('note'); const saveBtn = document.getElementById('saveBtn'); const clearBtn = document.getElementById('clearBtn'); note.value = localStorage.getItem('mr_lazarus_note') || ''; saveBtn.onclick = ()=> localStorage.setItem('mr_lazarus_note', note.value); clearBtn.onclick = ()=>{ note.value=''; localStorage.removeItem('mr_lazarus_note'); }; </script> </body></html></textarea> <div style="margin-top:8px"><button onclick="runPreview('code-storage','preview-storage')">Run</button></div> <iframe id="preview-storage" class="preview"></iframe> </div> </div> </section>
+
+<!-- Slide 5: Accessibility & SEO -->
+<section class="slide" id="slide-5">
+  <header class="deck-head"><div class="title"><h1>Accessibility & SEO</h1>
+    <div class="meta">Simple rules that make big difference</div></div>
+    <div class="controls"><button id="s5-prev" class="ghost">◀ Prev</button><button id="s5-next">Next ▶</button></div>
+  </header>
+  <div class="grid">
+    <div class="card">
+      <h3>Practical checklist</h3>
+      <ul>
+        <li>Always include <code>alt</code> on images</li>
+        <li>Use semantic headings & landmarks</li>
+        <li>Forms: use &lt;label for="..."&gt;</li>
+        <li>Use <code>rel="noopener"</code> for external links opened in new tabs</li>
+        <li>Provide captions & transcripts for media</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Live example — accessible form</h3>
+      <textarea id="code-a11y" class="code">&lt;!doctype html&gt;
+
+<html lang="en"><body> <form> <label for="email">Email address</label> <input id="email" name="email" type="email" aria-describedby="emailHelp" required> <small id="emailHelp">We will never share your email.</small> </form> </body></html></textarea> <div style="margin-top:8px"><button onclick="runPreview('code-a11y','preview-a11y')">Run</button></div> <iframe id="preview-a11y" class="preview"></iframe> </div> </div> </section>
+
+<!-- Slide 6: Mini challenge -->
+<section class="slide" id="slide-6">
+  <header class="deck-head"><div class="title"><h1>Mini Interactive Challenge</h1>
+    <div class="meta">Build a small contact card using what you've learned</div></div>
+    <div class="controls"><button id="s6-prev" class="ghost">◀ Prev</button><button id="s6-next">Next ▶</button></div>
+  </header>
+  <div class="card">
+    <h3>Task</h3>
+    <ol>
+      <li>Create a semantic contact card using &lt;article&gt; and &lt;figure&gt;</li>
+      <li>Include an email input and a datalist with suggestions</li>
+      <li>Use localStorage to save the contact name</li>
+    </ol>
+    <p class="small">Starter code below — edit and run to test. When finished, show to class and discuss accessibility choices.</p>
+    <textarea id="code-challenge" class="code">&lt;!doctype html&gt;
+
+<html><body> <article> <figure><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='100%25' height='100%25' fill='%23006bb3'/%3E%3C/text%3E%3C/svg%3E" alt="avatar"/><figcaption>Instructor</figcaption></figure> <h2 id="name">Your Name</h2> <label>Email <input list="emails"></label> <datalist id="emails"> <option value="student1@example.com"> <option value="student2@example.com"> </datalist> </article> <script> const saved = localStorage.getItem('contact_name'); if(saved) document.getElementById('name').textContent = saved; </script> </body></html></textarea> <div style="margin-top:8px"><button onclick="runPreview('code-challenge','preview-challenge')">Run</button></div> <iframe id="preview-challenge" class="preview"></iframe> </div> </section>
+
+<!-- Slide 7: Resources & closing -->
+<section class="slide" id="slide-7">
+  <header class="deck-head"><div class="title"><h1>Resources & Next Steps</h1>
+    <div class="meta">Further reading and exercises</div></div>
+    <div class="controls"><button id="s7-prev" class="ghost">◀ Prev</button><button id="s7-next">Next ▶</button></div>
+  </header>
+  <div class="card">
+    <h3>Links to show students</h3>
+    <ul>
+      <li>MDN Web Docs (HTML, forms, accessibility)</li>
+      <li>WebAIM — accessibility guidance</li>
+      <li>Google Developers — performance & best practices</li>
+    </ul>
+    <p class="small">Thanks for teaching — encourage students to inspect, edit, and experiment live.</p>
+  </div>
+  <footer class="deck-foot">
+    <div>Want this zipped or branded with a custom logo? I can do that next.</div>
+    <div>&copy; Mr. Lazarus</div>
+  </footer>
+</section>
+
+  </div>  <script>
+    // navigation
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let idx = 0;
+    function show(i){ slides.forEach(s=>s.classList.remove('active')); slides[i].classList.add('active'); idx = i; }
+    document.getElementById('next').addEventListener('click', ()=> show((idx+1)%slides.length));
+    document.getElementById('prev').addEventListener('click', ()=> show((idx-1+slides.length)%slides.length));
+    // per-slide small nav
+    ['s1-next','s2-next','s3-next','s4-next','s5-next','s6-next','s7-next'].forEach(id=>{ const el = document.getElementById(id); if(el) el.addEventListener('click', ()=> show((idx+1)%slides.length)); });
+    ['s1-prev','s2-prev','s3-prev','s4-prev','s5-prev','s6-prev','s7-prev'].forEach(id=>{ const el = document.getElementById(id); if(el) el.addEventListener('click', ()=> show((idx-1+slides.length)%slides.length)); });
+    document.addEventListener('keydown', e=>{ if(e.key==='ArrowRight') show((idx+1)%slides.length); if(e.key==='ArrowLeft') show((idx-1+slides.length)%slides.length); });
+
+    // theme toggle
+    const themeBtn = document.getElementById('theme');
+    themeBtn.addEventListener('click', ()=>{
+      const dark = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() === '#0b1220';
+      if(dark){ // switch to light
+        document.documentElement.style.setProperty('--bg','#ffffff');
+        document.documentElement.style.setProperty('--fg','#0b1220');
+        document.documentElement.style.setProperty('--muted','#5a6470');
+        document.documentElement.style.setProperty('--accent','#0066cc');
+        document.documentElement.style.setProperty('--card','#f6f8fa');
+      } else {
+        document.documentElement.style.setProperty('--bg','#0b1220');
+        document.documentElement.style.setProperty('--fg','#eef3f8');
+        document.documentElement.style.setProperty('--muted','#9aa6b2');
+        document.documentElement.style.setProperty('--accent','#3da0ff');
+        document.documentElement.style.setProperty('--card','#11151a');
+      }
+    });
+
+    // run preview helper: create blob and set iframe src
+    function runPreview(codeId, iframeId){
+      const code = document.getElementById(codeId).value;
+      const blob = new Blob([code], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const iframe = document.getElementById(iframeId);
+      iframe.src = url;
+      // revoke after a short delay to allow load
+      setTimeout(()=> URL.revokeObjectURL(url), 2000);
+    }
+
+    // initialize previews with starter content to avoid empty frames
+    ['preview-semantics','preview-form','preview-picture','preview-storage','preview-a11y','preview-challenge'].forEach(id=>{
+      const iframe = document.getElementById(id); if(iframe) iframe.srcdoc = '<!doctype html><meta charset="utf-8"><body style="font-family:system-ui,sans-serif;padding:12px"><em>Press Run to load demo</em></body>';
+    });
+  </script></body>
+</html>
